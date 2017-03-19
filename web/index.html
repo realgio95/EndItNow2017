@@ -35,13 +35,21 @@
            }(document, 'script', 'facebook-jssdk'));
 
            function myFacebookLogin() {
-             FB.login(function(){FB.api('/me/feed', 'post', {message: 'Hello, world!'});}, {scope: 'publish_actions'});
+             FB.login(function(){FB.api('/me/feed', 'post', {message: '!!!'});}, {scope: 'publish_actions'});
+           }
+
+           function myFacebookName() {
+             FB.api('/me', function(response) {
+                  alert("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
+                  var img_link = "http://graph.facebook.com/"+response.id+"/picture"
+              });
            }
 
         </script>
 
 
        <button onclick="myFacebookLogin()">Login with Facebook</button>
+       <button onclick="myFacebookName()">What is my name?</button>
 
 
 
