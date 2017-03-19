@@ -51,14 +51,16 @@
        }(document, 'script', 'facebook-jssdk'));
 
        function myFacebookLogin() {
-         FB.login(function(response){}, {scope: 'email,user_likes,user_posts'});
-         Console.log(response.status)
+         FB.login(function(response){
+           Console.log(response.status)
           if (response.status === 'connected'){
             alert("Connected")
 
           } else {
             alert("Not Connected")
           }
+        }, {scope: 'email,user_likes,user_posts'});
+
        }
 
        function myFacebookName() {
