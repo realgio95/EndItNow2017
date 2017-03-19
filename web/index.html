@@ -74,9 +74,6 @@
               for (var like of response.likes.data){
                 likesList.push(like.name);
               }
-              for (var likeName of likesList){
-                alert(likeName);
-              }
            });
            return likesObjects;
         }
@@ -100,6 +97,7 @@
                 userInfo.posts = [];
                 response.data.forEach(function(post){
                    userInfo.posts.push(post.message);
+                   alert(post.message);
                 });
 
               });
