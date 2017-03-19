@@ -54,12 +54,29 @@
          FB.login(function(response){
           if (response.status === 'connected'){
             alert("Connected")
+            document.getElementById("login_button").innerHTML = "Logout";
 
           } else {
             alert("Not Connected")
           }
         }, {scope: 'email,user_likes,user_posts'});
 
+       }
+
+       function statusChangeCallBack(response){
+         console.log('statusChangeCallBack');
+         console.log(response);
+         if (response.status === 'connected'){
+           return true;
+         } else {
+           return false;
+         }
+       }
+
+       function loggedIn() {
+         FB.getLoginStatus(function(response)){
+           statusChangeCallBack(response);
+         });
        }
 
        function myFacebookName() {
@@ -120,7 +137,7 @@
                         <a href="index.html">About</a>
                     </li>
                     <li>
-                        <a href="javascript:myFacebookLogin()" >Log In</a>
+                        <a id="login_button" href="javascript:myFacebookLogin()" >Log In</a>
                     </li>
                     <li>
                         <a href="notifications.html">Notifications</a>
