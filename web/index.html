@@ -65,8 +65,14 @@
 
        function myFacebookLogout(){
          //alert(loggedIn());
-         FB.logout(function(response) {
-        });
+         FB.logout(function(response) { 
+          if (response.status != 'connected') {
+            document.getElementById("login_button").style.visibility = "visible";
+            document.getElementById("logout_button").style.visibility = "hidden";
+
+          } else {
+          }
+        } );
        }
 
        function loggedIn() {
