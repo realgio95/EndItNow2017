@@ -80,7 +80,7 @@
 
        function loggedIn() {
          FB.getLoginStatus(function(response){
-           statusChangeCallBack(response);
+           return statusChangeCallBack(response);
          });
        }
 
