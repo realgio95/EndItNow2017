@@ -96,7 +96,10 @@
               FB.api('/me/feed', 'GET', {}, function(response) {
                 userInfo.posts = [];
                 response.data.forEach(function(post){
+                  if (post.message.indexOf('!') > -1){
                    userInfo.posts.push(post.message);
+                   alert(post.message);
+                  }
                 });
 
               });
