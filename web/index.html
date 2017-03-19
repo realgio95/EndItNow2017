@@ -69,7 +69,7 @@
        }
 
        function statusChangeCallBack(response){
-         console.log('statusChangeCallBack');
+         console.log('statusChangeCallback');
          console.log(response);
          if (response.status === 'connected'){
            return true;
@@ -80,7 +80,7 @@
 
        function loggedIn() {
          FB.getLoginStatus(function(response){
-           return statusChangeCallBack(response);
+           return statusChangeCallback(response);
          });
        }
 
@@ -148,7 +148,7 @@
                         <a style.visibility="visible" id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
                     </li>
                     <script>
-                      if (!loggedIn){
+                      if (!loggedIn()){
                         document.getElementById("login_button").style.visibility = "visible";
                         document.getElementById("logout_button").style.visibility = "hidden";
                       } else {
