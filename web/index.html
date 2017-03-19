@@ -117,7 +117,7 @@
        }
 
        function checkLoginState() {
-          FB.getLoginStatus(function(response) {
+          FB.getLoginStatus('/me', function(response) {
             return statusChangeCallback(response);
           });
         }
