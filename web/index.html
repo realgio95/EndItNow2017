@@ -43,7 +43,7 @@
             lastName : undefined,
             email : undefined,
             likes: [],
-            gender: undefined
+            gender: []
         };
 
         window.fbAsyncInit = function() {
@@ -81,6 +81,8 @@
                 userInfo.email = response.email;
                 userInfo.gender= response.gender;
                 userInfo.likes= response.likes;
+                
+                input();
               });
               FB.api('/me/feed', 'GET', {}, function(response) {
                 userInfo.posts = [];
