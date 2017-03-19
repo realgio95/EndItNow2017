@@ -137,6 +137,12 @@
                     <li>
                         <a href="index.html">About</a>
                     </li>
+                    <li>
+                        <a id="login_button" href="javascript:myFacebookLogin()" >Login</a>
+                    </li>
+                    <li>
+                        <a id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
+                    </li>
                     <script>
                       if (loggedIn){
                         document.getElementById("login_button").style.visibility = "hidden";
@@ -146,12 +152,6 @@
                         document.getElementById("logout_button").style.visibility = "hidden";
                       }
                     </script>
-                    <li>
-                        <a id="login_button" href="javascript:myFacebookLogin()" >Login</a>
-                    </li>
-                    <li>
-                        <a id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
-                    </li>
                     <li>
                         <a href="notifications.html">Notifications</a>
                     </li>
