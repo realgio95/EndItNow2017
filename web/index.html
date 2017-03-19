@@ -13,8 +13,47 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
     </head>
     <body>
+      <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1515152825175931',
+          xfbml      : true,
+          version    : 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      FB.ui({
+       method: 'share_open_graph',
+       action_type: 'og.likes',
+       action_properties: JSON.stringify({
+         object:'https://developers.facebook.com/docs/',
+       })
+     }, function(response){
+       // Debug response (optional)
+       console.log(response);
+     });
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+
+      </script>
+
+      <script>
+
+
+        FB.ui();
+
+      </script>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -37,4 +76,6 @@
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
     </body>
+
+
 </html>
