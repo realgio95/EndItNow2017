@@ -8,6 +8,7 @@
     likes: []
 
   };
+  
    window.fbAsyncInit = function() {
             FB.init({
               appId      : '1515152825175931',
