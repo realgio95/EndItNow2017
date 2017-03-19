@@ -42,8 +42,9 @@
             firstName : undefined,
             lastName : undefined,
             email : undefined,
+            gender: undefined,
             likes: [],
-            gender: []
+            posts: []
         };
 
         window.fbAsyncInit = function() {
@@ -67,11 +68,22 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
+        function myFacebookLikes() {
+          var likesObjects = [];
+          FB.api('/me', {fields: 'gender, first_name, last_name, email, likes'}, function(response) {
+            var likesList = [];
+              for (var like of response.likes.data){
+                likesList.push(like.name);
+              }
+           });
+           return likesObjects;
+        }
+
         function myFacebookLogin() {
           FB.login(function(response) {
             if (response.status === 'connected') {
-              document.getElementById("login_button").style.visibility = "hidden";
-              document.getElementById("logout_button").style.visibility = "visible";
+              document.getElementById("login_button").innerHTML = "Logout";
+              document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogout()" );
               FB.api('/me', {
                 fields: 'gender, first_name, last_name, email, likes'
               }, function(response){
@@ -80,14 +92,18 @@
                 userInfo.lastName = response.last_name;
                 userInfo.email = response.email;
                 userInfo.gender= response.gender;
-                userInfo.likes= response.likes;
-                
+                userInfo.likes= myFacebookLikes();           
+                                
                 input();
+
               });
               FB.api('/me/feed', 'GET', {}, function(response) {
                 userInfo.posts = [];
                 response.data.forEach(function(post){
+                  if (post.message.indexOf('#EndItNow2017') > -1){
                    userInfo.posts.push(post.message);
+                   alert(post.message);
+                  }
                 });
 
               });
@@ -102,8 +118,8 @@
           FB.getLoginStatus(function(response) {
             if (response && response.status === 'connected') {
               FB.logout(function(response) {
-                document.getElementById("login_button").style.visibility = "visible";
-                document.getElementById("logout_button").style.visibility = "hidden";
+                document.getElementById("login_button").innerHTML = "Login";
+                document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogin()" );
                 document.location.reload();
               });
             }
@@ -114,11 +130,11 @@
           FB.getLoginStatus(function(response) {
             console.log(response);
             if (response.status === 'connected') {
-              document.getElementById("login_button").style.visibility = "hidden";
-              document.getElementById("logout_button").style.visibility = "visible";
+              document.getElementById("login_button").innerHTML = "Logout";
+              document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogout()" );
             } else {
-              document.getElementById("login_button").style.visibility = "visible";
-              document.getElementById("logout_button").style.visibility = "hidden";
+              document.getElementById("login_button").innerHTML = "Login";
+              document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogin()" );
             }
           });
         }
@@ -143,9 +159,6 @@
                     </li>
                     <li>
                         <a id="login_button" href="javascript:myFacebookLogin()" >Login</a>
-                    </li>
-                    <li>
-                        <a id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
                     </li>
                     <li>
                         <a href="notifications.html">Notifications</a>
