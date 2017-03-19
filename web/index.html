@@ -51,7 +51,7 @@
        }(document, 'script', 'facebook-jssdk'));
 
        function myFacebookLogin() {
-         FB.login(function(){}, {scope: 'email,user_likes,user_posts'});
+         FB.login(function(response){}, {scope: 'email,user_likes,user_posts'});
          Console.log(response.status)
           if (response.status === 'connected'){
             alert("Connected")
