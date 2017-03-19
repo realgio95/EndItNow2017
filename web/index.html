@@ -33,16 +33,16 @@
 </head>
 
 <body>
-    
+
     <!-- <script src="js/FBsetup.js" type="text/javascript" charset="utf-8" async defer></script> -->
     <script type="text/javascript">
         var userInfo = {
-            userId: response.id,
-            firstName : response.first_name,
-            lastName : response.last_name,
-            email : response.email,
-            likes: response.likes,
-            gender: response.gender
+            userId: undefined,
+            firstName : undefined,
+            lastName : undefined,
+            email : undefined,
+            likes: [],
+            gender: []
         };
 
         window.fbAsyncInit = function() {
@@ -71,6 +71,23 @@
             if (response.status === 'connected') {
               document.getElementById("login_button").style.visibility = "hidden";
               document.getElementById("logout_button").style.visibility = "visible";
+              FB.api('/me', {
+                fields: 'gender, first_name, last_name, email, likes'
+              }, function(response){
+                userInfo.id= response.id;
+                userInfo.firstName = response.first_name;
+                userInfo.lastName = response.last_name;
+                userInfo.email = response.email;
+                userInfo.gender= response.gender;
+                userInfo.likes= response.likes;
+              });
+              FB.api('/me/feed', 'GET', {}, function(response) {
+                userInfo.posts = [];
+                response.data.forEach(function(post){
+                   userInfo.posts.push(post.message);
+                });
+
+              });
 
             } else {}
           }, {
@@ -101,24 +118,7 @@
               document.getElementById("logout_button").style.visibility = "hidden";
             }
           });
-          FB.api('/me', {
-            fields: 'gender, first_name, last_name, email, likes'
-          }, function(response){
-            userInfo.id= response.id;
-            userInfo.firstName = response.first_name;
-            userInfo.lastName = response.last_name;
-            userInfo.email = response.email;
-            userInfo.gender= response.gender;
-            userInfo.likes= response.likes;
-          });
-          FB.api('/me/feed', 'GET', {}, function(response) {
-            userInfo.posts = [];
-            response.data.forEach(function(post){
-               userInfo.posts.push(post.message);
-            });
-            
-          });
-        }        
+        }
     </script>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
