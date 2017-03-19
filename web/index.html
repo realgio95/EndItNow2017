@@ -40,6 +40,13 @@
           version    : 'v2.8'
         });
         FB.AppEvents.logPageView();
+        if (!loggedIn()){
+          document.getElementById("login_button").style.visibility = "visible";
+          document.getElementById("logout_button").style.visibility = "hidden";
+        } else {
+          document.getElementById("login_button").style.visibility = "hidden";
+          document.getElementById("logout_button").style.visibility = "visible";
+        }
       };
 
       (function(d, s, id){
@@ -147,16 +154,6 @@
                     <li>
                         <a style.visibility="visible" id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
                     </li>
-                    <script>
-                      FB.init();
-                      if (!loggedIn()){
-                        document.getElementById("login_button").style.visibility = "visible";
-                        document.getElementById("logout_button").style.visibility = "hidden";
-                      } else {
-                        document.getElementById("login_button").style.visibility = "hidden";
-                        document.getElementById("logout_button").style.visibility = "visible";
-                      }
-                    </script>
                     <li>
                         <a href="notifications.html">Notifications</a>
                     </li>
