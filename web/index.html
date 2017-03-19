@@ -63,17 +63,17 @@
 
        }
 
-       function myFacebookLogout(){
-         //alert(loggedIn());
-         FB.logout(function(response) { 
-          if (response.status != 'connected') {
-            document.getElementById("login_button").style.visibility = "visible";
-            document.getElementById("logout_button").style.visibility = "hidden";
-
-          } else {
-          }
-        } );
-       }
+       function myFacebookLogout() { 
+        FB.getLoginStatus(function(response) {
+        if (response && response.status === 'connected') {
+            FB.logout(function(response) {
+                document.getElementById("login_button").style.visibility = "visible";
+                document.getElementById("logout_button").style.visibility = "hidden";
+                document.location.reload();
+                });
+              }
+          });
+        }
 
        function loggedIn() {
           FB.getLoginStatus(function(response) {
