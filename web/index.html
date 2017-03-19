@@ -69,8 +69,8 @@
         function myFacebookLogin() {
           FB.login(function(response) {
             if (response.status === 'connected') {
-              document.getElementById("login_button").style.visibility = "hidden";
-              document.getElementById("logout_button").style.visibility = "visible";
+              document.getElementById("login_button").innerHTML = "Logout";
+              document.getElementById("login_button").onclick = "myFacebookLogout";
               FB.api('/me', {
                 fields: 'gender, first_name, last_name, email, likes'
               }, function(response){
@@ -99,8 +99,8 @@
           FB.getLoginStatus(function(response) {
             if (response && response.status === 'connected') {
               FB.logout(function(response) {
-                document.getElementById("login_button").style.visibility = "visible";
-                document.getElementById("logout_button").style.visibility = "hidden";
+                document.getElementById("login_button").innerHTML = "Login";
+                document.getElementById("login_button").onclick = "myFacebookLogin";
                 document.location.reload();
               });
             }
@@ -111,11 +111,11 @@
           FB.getLoginStatus(function(response) {
             console.log(response);
             if (response.status === 'connected') {
-              document.getElementById("login_button").style.visibility = "hidden";
-              document.getElementById("logout_button").style.visibility = "visible";
+              document.getElementById("login_button").innerHTML = "Logout";
+              document.getElementById("login_button").onclick = "myFacebookLogout";
             } else {
-              document.getElementById("login_button").style.visibility = "visible";
-              document.getElementById("logout_button").style.visibility = "hidden";
+              document.getElementById("login_button").innerHTML = "Login";
+              document.getElementById("login_button").onclick = "myFacebookLogin";
             }
           });
         }
@@ -140,9 +140,6 @@
                     </li>
                     <li>
                         <a id="login_button" href="javascript:myFacebookLogin()" >Login</a>
-                    </li>
-                    <li>
-                        <a id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
                     </li>
                     <li>
                         <a href="notifications.html">Notifications</a>
