@@ -55,7 +55,7 @@
              FB.api('/me', {fields: 'gender, first_name, last_name, email, likes'}, function(response) {
                  var likesObjects = response.likes;
                  for (var like in likesObjects){
-                   alert(like.name);
+                   alert(like.toSource());
                  }
               });
            }
