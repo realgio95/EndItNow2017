@@ -40,9 +40,15 @@
 
            function myFacebookName() {
              FB.api('/me', function(response) {
-                  alert("Name: "+ response.user_likes + "\nFirst name: "+ response.first_name + "ID: "+response.id);
-                  var img_link = "http://graph.facebook.com/"+response.id+"/picture"
+                  alert("Name: "+ response.user_likes + "\nFirst name: " + response.first_name + "ID: "+response.id);
               });
+           }
+
+          function myFacebookMore() {
+           FB.api('/me', {fields: 'gender, first_name, last_name, email, likes'}, function(response) {
+               alert("Likes: "+ response.likes + "\nEmail: " + response.email + "Gender: "+response.gender);
+               console.log(response);
+             });
            }
 
         </script>
@@ -50,6 +56,7 @@
 
        <button onclick="myFacebookLogin()">Login with Facebook</button>
        <button onclick="myFacebookName()">What is my name?</button>
+       <button onclick="myFacebookName()">More?</button>
 
 
 
