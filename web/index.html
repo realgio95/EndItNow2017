@@ -64,7 +64,9 @@
        }
 
        function myFacebookLogout(){
-         alert(loggedIn());
+         //alert(loggedIn());
+         FB.logout(function(response) {
+        });
        }
 
        function loggedIn() {
