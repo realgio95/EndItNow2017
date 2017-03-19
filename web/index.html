@@ -46,7 +46,7 @@
 
           function myFacebookMore() {
            FB.api('/me', {fields: 'gender, first_name, last_name, email, likes'}, function(response) {
-               alert("Name: " + response.name + "\nEmail: " + response.email + "\nGender: "+response.gender);
+               alert("Name: " + response.first_name + "\nEmail: " + response.email + "\nGender: "+response.gender);
              });
            }
 
