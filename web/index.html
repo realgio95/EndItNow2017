@@ -63,6 +63,13 @@
               });
            }
 
+           function myFacebookPosts(){
+             FB.api('/me/feed', 'GET', {},function(response) {
+                  alert(response.toSource());
+              }
+            );
+           }
+
         </script>
 
 
