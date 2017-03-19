@@ -78,6 +78,12 @@
          }
        }
 
+       function loggedIn() {
+          FB.getLoginStatus(function(response) {
+            return statusChangeCallback(response);
+          });
+        }
+
        function myFacebookName() {
          FB.api('/me', function(response) {
               alert("Name: "+ response.name + "\nFirst name: " + response.first_name + "\nID: "+response.id);
@@ -116,12 +122,6 @@
         );
        }
 
-       function checkLoginState() {
-          FB.getLoginStatus('/me', function(response) {
-            return statusChangeCallback(response);
-          });
-        }
-
      </script>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -148,7 +148,8 @@
                         <a style.visibility="visible" id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
                     </li>
                     <script>
-                      if (!checkLoginState()){
+                      FB.init();
+                      if (!loggedIn()){
                         document.getElementById("login_button").style.visibility = "visible";
                         document.getElementById("logout_button").style.visibility = "hidden";
                       } else {
