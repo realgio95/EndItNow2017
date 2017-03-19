@@ -148,12 +148,12 @@
                         <a id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
                     </li>
                     <script>
-                      if (loggedIn){
-                        document.getElementById("login_button").style.visibility = "hidden";
-                        document.getElementById("logout_button").style.visibility = "visible";
-                      } else {
+                      if (!loggedIn){
                         document.getElementById("login_button").style.visibility = "visible";
                         document.getElementById("logout_button").style.visibility = "hidden";
+                      } else {
+                        document.getElementById("login_button").style.visibility = "hidden";
+                        document.getElementById("logout_button").style.visibility = "visible";
                       }
                     </script>
                     <li>
