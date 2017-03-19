@@ -24,18 +24,9 @@
           version    : 'v2.8'
         });
         FB.AppEvents.logPageView();
-      };
 
-      FB.ui({
-       method: 'share_open_graph',
-       action_type: 'og.likes',
-       action_properties: JSON.stringify({
-         object:'https://developers.facebook.com/docs/',
-       })
-     }, function(response){
-       // Debug response (optional)
-       console.log(response);
-     });
+
+      };
 
       (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
@@ -45,15 +36,27 @@
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
 
+       </script>
 
-      </script>
+       <script>
+        window.fbAsyncInit = function() {
+          // Only works after `FB.init` is called
+          function myFacebookLogin() {
+            FB.login(function(){}, {scope: 'publish_actions'});
+          }
+          // Only works after `FB.init` is called
+          function myFacebookLogin() {
+            FB.login(function(){}, {scope: 'publish_actions'});
+          }
+        };
+       </script>
 
-      <script>
+
+       <button onclick="myFacebookLogin()">Login with Facebook</button>
 
 
-        FB.ui();
 
-      </script>
+
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
