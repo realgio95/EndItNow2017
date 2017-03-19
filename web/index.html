@@ -40,13 +40,7 @@
           version    : 'v2.8'
         });
         FB.AppEvents.logPageView();
-        if (!loggedIn()){
-          document.getElementById("login_button").style.visibility = "visible";
-          document.getElementById("logout_button").style.visibility = "hidden";
-        } else {
-          document.getElementById("login_button").style.visibility = "hidden";
-          document.getElementById("logout_button").style.visibility = "visible";
-        }
+        loggedIn();
       };
 
       (function(d, s, id){
@@ -72,14 +66,16 @@
        function myFacebookLogout(){
          alert(loggedIn());
        }
-       
+
        function loggedIn() {
           FB.getLoginStatus(function(response) {
             console.log(response);
             if (response.status === 'connected'){
-              return true;
+                document.getElementById("login_button").style.visibility = "hidden";
+                document.getElementById("logout_button").style.visibility = "visible";
             } else {
-              return false;
+                document.getElementById("login_button").style.visibility = "visible";
+                document.getElementById("logout_button").style.visibility = "hidden";
             }
           });
         }
