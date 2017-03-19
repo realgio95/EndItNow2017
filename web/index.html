@@ -60,12 +60,10 @@
        function myFacebookLogin() {
          FB.login(function(response){
           if (response.status === 'connected'){
-            alert("Connected")
             document.getElementById("login_button").style.visibility = "hidden";
             document.getElementById("logout_button").style.visibility = "visible";
 
           } else {
-            alert("Not Connected")
           }
         }, {scope: 'email,user_likes,user_posts'});
 
@@ -74,20 +72,15 @@
        function myFacebookLogout(){
          alert(loggedIn());
        }
-
-       function statusChangeCallBack(response){
-         console.log('statusChangeCallBack');
-         console.log(response);
-         if (response.status === 'connected'){
-           return true;
-         } else {
-           return false;
-         }
-       }
-
+       
        function loggedIn() {
           FB.getLoginStatus(function(response) {
-            return statusChangeCallBack(response);
+            console.log(response);
+            if (response.status === 'connected'){
+              return true;
+            } else {
+              return false;
+            }
           });
         }
 
@@ -149,10 +142,10 @@
                         <a href="index.html">About</a>
                     </li>
                     <li>
-                        <a style.visibility="visible" id="login_button" href="javascript:myFacebookLogin()" >Login</a>
+                        <a id="login_button" href="javascript:myFacebookLogin()" >Login</a>
                     </li>
                     <li>
-                        <a style.visibility="visible" id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
+                        <a id="logout_button" href="javascript:myFacebookLogout()" >Logout</a>
                     </li>
                     <li>
                         <a href="notifications.html">Notifications</a>
