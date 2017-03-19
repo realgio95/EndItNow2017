@@ -51,7 +51,12 @@
        }(document, 'script', 'facebook-jssdk'));
 
        function myFacebookLogin() {
-         FB.login(function(){}, {scope: 'publish_actions,email,user_likes,user_posts'});
+         FB.login(function(){}, {scope: 'email,user_likes,user_posts'});
+          if (response.status === 'connected'){
+            myFacebookLikes();
+          } else {
+            myFacebookName();
+          }
        }
 
        function myFacebookName() {
