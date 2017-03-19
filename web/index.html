@@ -54,6 +54,9 @@
              var likesObjects = [];
              FB.api('/me', {fields: 'gender, first_name, last_name, email, likes'}, function(response) {
                  alert(response.likes.toSource());
+                 for (var like in response.likes.data){
+                   alert(like.name.toSource());
+                 }
               });
            }
 
