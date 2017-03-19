@@ -35,7 +35,7 @@
            }(document, 'script', 'facebook-jssdk'));
 
            function myFacebookLogin() {
-             FB.login(function(){FB.api('/me/feed', 'post', {message: '!!!'});}, {scope: 'publish_actions'});
+             FB.login(function(){}, {scope: 'publish_actions,email,user_likes'});
            }
 
            function myFacebookName() {
