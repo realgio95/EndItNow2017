@@ -70,7 +70,7 @@
           FB.login(function(response) {
             if (response.status === 'connected') {
               document.getElementById("login_button").innerHTML = "Logout";
-              document.getElementById("login_button").setAttribute( "onClick", "javascript: myFacebookLogout();" );
+              document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogout()" );
               FB.api('/me', {
                 fields: 'gender, first_name, last_name, email, likes'
               }, function(response){
@@ -100,7 +100,7 @@
             if (response && response.status === 'connected') {
               FB.logout(function(response) {
                 document.getElementById("login_button").innerHTML = "Login";
-                document.getElementById("login_button").setAttribute( "onClick", "javascript: myFacebookLogin();" );
+                document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogin()" );
                 document.location.reload();
               });
             }
@@ -112,10 +112,10 @@
             console.log(response);
             if (response.status === 'connected') {
               document.getElementById("login_button").innerHTML = "Logout";
-              document.getElementById("login_button").setAttribute( "onClick", "javascript: myFacebookLogout();" );
+              document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogout()" );
             } else {
               document.getElementById("login_button").innerHTML = "Login";
-              document.getElementById("login_button").setAttribute( "onClick", "javascript: myFacebookLogin();" );
+              document.getElementById("login_button").setAttribute( "href", "javascript:myFacebookLogin()" );
             }
           });
         }
