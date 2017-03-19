@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script src="js/application.js" type="text/javascript" charset="utf-8" async defer></script>
     <title>End It Now</title>
 
     <!-- Bootstrap Core CSS -->
@@ -32,101 +33,93 @@
 </head>
 
 <body>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '1515152825175931',
-          xfbml      : true,
-          version    : 'v2.8'
-        });
-        FB.AppEvents.logPageView();
-        loggedIn();
-      };
+    
+    <!-- <script src="js/FBsetup.js" type="text/javascript" charset="utf-8" async defer></script> -->
+    <script type="text/javascript">
+        var userInfo = {
+            userId: response.id,
+            firstName : response.first_name,
+            lastName : response.last_name,
+            email : response.email,
+            likes: response.likes,
+            gender: response.gender
+        };
 
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "https://connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId: '1515152825175931',
+            xfbml: true,
+            version: 'v2.8'
+          });
+          FB.AppEvents.logPageView();
+          loggedIn();
+        };
 
-       function myFacebookLogin() {
-         FB.login(function(response){
-          if (response.status === 'connected'){
-            document.getElementById("login_button").style.visibility = "hidden";
-            document.getElementById("logout_button").style.visibility = "visible";
-
-          } else {
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {
+            return;
           }
-        }, {scope: 'email,user_likes,user_posts'});
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
-       }
+        function myFacebookLogin() {
+          FB.login(function(response) {
+            if (response.status === 'connected') {
+              document.getElementById("login_button").style.visibility = "hidden";
+              document.getElementById("logout_button").style.visibility = "visible";
 
-       function myFacebookLogout() { 
-        FB.getLoginStatus(function(response) {
-        if (response && response.status === 'connected') {
-            FB.logout(function(response) {
-                document.getElementById("login_button").style.visibility = "visible";
-                document.getElementById("logout_button").style.visibility = "hidden";
-                document.location.reload();
-                });
-              }
+            } else {}
+          }, {
+            scope: 'email,user_likes,user_posts'
           });
         }
 
-       function loggedIn() {
+        function myFacebookLogout() {
           FB.getLoginStatus(function(response) {
-            console.log(response);
-            if (response.status === 'connected'){
-                document.getElementById("login_button").style.visibility = "hidden";
-                document.getElementById("logout_button").style.visibility = "visible";
-            } else {
+            if (response && response.status === 'connected') {
+              FB.logout(function(response) {
                 document.getElementById("login_button").style.visibility = "visible";
                 document.getElementById("logout_button").style.visibility = "hidden";
+                document.location.reload();
+              });
             }
           });
         }
 
-       function myFacebookName() {
-         FB.api('/me', function(response) {
-              alert("Name: "+ response.name + "\nFirst name: " + response.first_name + "\nID: "+response.id);
+        function loggedIn() {
+          FB.getLoginStatus(function(response) {
+            console.log(response);
+            if (response.status === 'connected') {
+              document.getElementById("login_button").style.visibility = "hidden";
+              document.getElementById("logout_button").style.visibility = "visible";
+            } else {
+              document.getElementById("login_button").style.visibility = "visible";
+              document.getElementById("logout_button").style.visibility = "hidden";
+            }
           });
-       }
-
-      function myFacebookMore() {
-       FB.api('/me', {fields: 'gender, first_name, last_name, email, likes'}, function(response) {
-           alert("Name: " + response.first_name + "\nEmail: " + response.email + "\nGender: "+response.gender);
-         });
-       }
-
-       function myFacebookLikes() {
-         var likesObjects = [];
-         FB.api('/me', {fields: 'gender, first_name, last_name, email, likes'}, function(response) {
-           var likesList = [];
-             for (var like of response.likes.data){
-               likesList.push(like.name);
-             }
-             for (var likeName of likesList){
-               alert(likeName);
-             }
+          FB.api('/me', {
+            fields: 'gender, first_name, last_name, email, likes'
+          }, function(response){
+            userInfo.id= response.id;
+            userInfo.firstName = response.first_name;
+            userInfo.lastName = response.last_name;
+            userInfo.email = response.email;
+            userInfo.gender= response.gender;
+            userInfo.likes= response.likes;
           });
-       }
-
-       function myFacebookPosts(){
-         FB.api('/me/feed', 'GET', {},function(response) {
-           var postsList = [];
-           for (var post of response.data){
-             postsList.push(post.message);
-           }
-           for (var postMessage of postsList){
-             alert(postMessage);
-           }
-          }
-        );
-       }
-
-     </script>
+          FB.api('/me/feed', 'GET', {}, function(response) {
+            userInfo.posts = [];
+            response.data.forEach(function(post){
+               userInfo.posts.push(post.message);
+            });
+            
+          });
+        }        
+    </script>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
